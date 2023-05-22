@@ -6,7 +6,7 @@ class ChannelAttention(nn.Module):
   def __init__(self,in_ch,reduction):
     super().__init__()
     self.pooling1=nn.AdaptiveAvgPool2d(1)
-    self.pooling2=nn.AdaptiveAvgPool2d(1)
+    self.pooling2=nn.AdaptiveMaxPool2d(1)
     self.relu=nn.ReLU(inplace=True)
     self.sigmoid=nn.Sigmoid()
     self.W0=nn.Conv2d(in_ch,in_ch//2,1,bias=False)
