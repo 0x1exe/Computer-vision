@@ -1,3 +1,4 @@
+#By the paper, RFB block should be attached on top of the SSD, constructing the RFB Net detector.
 class RFB(nn.Module):
     def __init__(self, in_channels, out_channels, stride=1, scale=0.1):
         super(RFB, self).__init__()
