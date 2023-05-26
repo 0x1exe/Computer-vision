@@ -102,20 +102,11 @@ class InvertedResidualBlock(nn.Module):
             nn.BatchNorm2d(out_channels),
         )
 
-    def stochastic_depth(self, x):
-        if not self.training:
-            return x
-
-        binary_tensor = (
-            torch.rand(x.shape[0], 1, 1, 1, device=x.device) < self.survival_prob
-        )
-        return torch.div(x, self.survival_prob) * binary_tensor
-
     def forward(self, inputs):
         x = self.expand_conv(inputs) if self.expand else inputs
 
         if self.use_residual:
-            return self.stochastic_depth(self.conv(x)) + inputs
+            return self.conv(x) + inputs
         else:
             return self.conv(x)
 
